@@ -186,7 +186,7 @@ await webhook.editMessage(process.env.ALL,{embeds:[embed]})
  
 // When the client is ready, run this code (only once)
 client.once('ready', async () => {
-	console.log('ready');
+	console.log('ai ai captain');
     
 
 
