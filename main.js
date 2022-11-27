@@ -80,43 +80,43 @@ let  monthlyembed = {
         },
         {
         name: `1:ㅤㅤ<@${sortMonthly[0].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortMonthly[0].messages
+        value: '**Message count**:' + 'ㅤ' + sortMonthly[0].monthlyMsg
     },
     {
         name: `2:ㅤㅤ<@${sortMonthly[1].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortMonthly[1].messages
+        value: '**Message count**:' + 'ㅤ' + sortMonthly[1].monthlyMsg
     },
     {
         name: `3:ㅤㅤ<@${sortMonthly[2].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortMonthly[2].messages
+        value: '**Message count**:' + 'ㅤ' + sortMonthly[2].monthlyMsg
     },
     {
         name: `4:ㅤㅤ<@${sortMonthly[3].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortMonthly[3].messages
+        value: '**Message count**:' + 'ㅤ' + sortMonthly[3].monthlyMsg
     },
     {
         name: `5:ㅤㅤ<@${sortMonthly[4].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortMonthly[4].messages
+        value: '**Message count**:' + 'ㅤ' + sortMonthly[4].monthlyMsg
     },
     {
         name: `6:ㅤㅤ<@${sortMonthly[5].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortMonthly[5].messages
+        value: '**Message count**:' + 'ㅤ' + sortMonthly[5].monthlyMsg
     },
     {
         name: `7:ㅤㅤ<@${sortMonthly[6].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortMonthly[6].messages
+        value: '**Message count**:' + 'ㅤ' + sortMonthly[6].monthlyMsg
     },
     {
         name: `8:ㅤㅤ<@${sortMonthly[7].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortMonthly[7].messages
+        value: '**Message count**:' + 'ㅤ' + sortMonthly[7].monthlyMsg
     },
     {
         name: `9:ㅤㅤ<@${sortMonthly[8].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortMonthly[8].messages
+        value: '**Message count**:' + 'ㅤ' + sortMonthly[8].monthlyMsg
     },
     {
         name: `10:ㅤㅤ<@${sortMonthly[9].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortMonthly[9].messages
+        value: '**Message count**:' + 'ㅤ' + sortMonthly[9].monthlyMsg
     },
 ],
     
@@ -134,43 +134,43 @@ let  dailyembed = {
         },
         {
         name: `1:ㅤㅤ<@${sortDaily[0].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortDaily[0].messages
+        value: '**Message count**:' + 'ㅤ' + sortDaily[0].dailyMsg
     },
     {
         name: `2:ㅤㅤ<@${sortDaily[1].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortDaily[1].messages
+        value: '**Message count**:' + 'ㅤ' + sortDaily[1].dailyMsg
     },
     {
         name: `3:ㅤㅤ<@${sortDaily[2].userid}>ㅤㅤ`,
-        value:'**Message count**:' + 'ㅤ' + sortDaily[2].messages
+        value:'**Message count**:' + 'ㅤ' + sortDaily[2].dailyMsg
     },
     {
         name: `4:ㅤㅤ<@${sortDaily[3].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortDaily[3].messages
+        value: '**Message count**:' + 'ㅤ' + sortDaily[3].dailyMsg
     },
     {
         name: `5:ㅤㅤ<@${sortDaily[4].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortDaily[4].messages
+        value: '**Message count**:' + 'ㅤ' + sortDaily[4].dailyMsg
     },
     {
         name: `6:ㅤㅤ<@${sortDaily[5].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortDaily[5].messages
+        value: '**Message count**:' + 'ㅤ' + sortDaily[5].dailyMsg
     },         
     {
         name: `7:ㅤㅤ<@${sortDaily[6].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortDaily[6].messages
+        value: '**Message count**:' + 'ㅤ' + sortDaily[6].dailyMsg
     },
     {
         name: `8:ㅤㅤ<@${sortDaily[7].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortDaily[7].messages
+        value: '**Message count**:' + 'ㅤ' + sortDaily[7].dailyMsg
     },
     {
         name: `9:ㅤㅤ<@${sortDaily[8].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortDaily[8].messages
+        value: '**Message count**:' + 'ㅤ' + sortDaily[8].dailyMsg
     },
     {
         name: `10:ㅤㅤ<@${sortDaily[9].userid}>ㅤㅤ`,
-        value:  '**Message count**:' + 'ㅤ' + sortDaily[9].messages
+        value:  '**Message count**:' + 'ㅤ' + sortDaily[9].dailyMsg
     },
 ],
     
