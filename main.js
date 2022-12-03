@@ -18,11 +18,11 @@ let sort = await Messages.find({}).sort({'messages': -1}).exec()
 let sortDaily = await Messages.find({}).sort({'dailyMsg': -1}).exec()
 let sortMonthly = await Messages.find({}).sort({'monthlyMsg': -1}).exec()
 let  embed = {
-    color: '#4527A0',
+    color: '#032257',
     title:`__**Messages Leaderboard**__`,
     fields: [
         {
-            name: `**Rank**ㅤㅤㅤㅤ**User**\nㅤ`,
+            name: `There are ${await Messages.count} competing for the first place!!`,
             value: '\u200B'
         },
         {
@@ -71,11 +71,11 @@ let  embed = {
 }
 
 let  monthlyembed = {
-    color: '#4527A0',
+    color: '#2d6fe0',
     title:`__**Monthly Messages Leaderboard**__`,
     fields: [
         {
-            name: `**Rank**ㅤㅤㅤㅤ**User**\nㅤ`,
+            name: `There are ${await Messages.count} competing every month for the first place!!`,
             value: '\u200B'
         },
         {
@@ -125,11 +125,11 @@ let  monthlyembed = {
 
 
 let  dailyembed = {
-    color: '#4527A0',
+    color: '#14db49',
     title:`__**Messages Leaderboard**__`,
     fields: [
         {
-            name: `**Rank**ㅤㅤㅤㅤ**User**\nㅤ`,
+            name: `There are ${await Messages.count} competing daily for the first place!!`,
             value: '\u200B'
         },
         {
