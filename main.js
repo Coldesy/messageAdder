@@ -22,7 +22,7 @@ let  embed = {
     title:`__**Messages Leaderboard**__`,
     fields: [
         {
-            name: `There are ${await Messages.count} competing for the first place!!`,
+            name: `There are ${await Messages.count()} competing for the first place!!`,
             value: '\u200B'
         },
         {
@@ -75,7 +75,7 @@ let  monthlyembed = {
     title:`__**Monthly Messages Leaderboard**__`,
     fields: [
         {
-            name: `There are ${await Messages.count} competing every month for the first place!!`,
+            name: `There are ${await Messages.count()} competing every month for the first place!!`,
             value: '\u200B'
         },
         {
@@ -129,7 +129,7 @@ let  dailyembed = {
     title:`__**Messages Leaderboard**__`,
     fields: [
         {
-            name: `There are ${await Messages.count} competing daily for the first place!!`,
+            name: `There are ${await Messages.count()} competing daily for the first place!!`,
             value: '\u200B'
         },
         {
