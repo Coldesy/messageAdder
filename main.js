@@ -1,6 +1,4 @@
 const schedule = require('node-schedule');
-
-
 const {Messages} = require('./schema.js')
 const fs = require('fs');
 const { Client, Collection, Intents,MessageEmbed,WebhookClient} = require('discord.js');
@@ -14,172 +12,219 @@ const webhook =new WebhookClient({url : 'https://discord.com/api/webhooks/104463
 const All = new Intents(7796)
 const client = new Client({partials:['MESSAGE','CHANNEL','GUILD_MEMBER','USER'], intents: [Intents.FLAGS.GUILD_MESSAGES,Intents.FLAGS.GUILDS,Intents.FLAGS.MESSAGE_CONTENT,Intents.FLAGS.GUILD_MEMBERS,Intents.FLAGS.GUILD_INTEGRATIONS] });
 const webFunc = async ()=>{
-let sort = await Messages.find({}).sort({'messages': -1}).exec()
-let sortDaily = await Messages.find({}).sort({'dailyMsg': -1}).exec()
-let sortMonthly = await Messages.find({}).sort({'monthlyMsg': -1}).exec()
-let  embed = {
-    color: '#032257',
-    title:`__**Messages Leaderboard**__`,
-    fields: [
-        {
-            name: `There are ${await Messages.count()} competing for the first place!!`,
-            value: '\u200B'
-        },
-        {
-        name: `1:ㅤㅤ<@${sort[0].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sort[0].messages
-    },
-    {
-        name: `2:ㅤㅤ<@${sort[1].userid}>`,
-        value: '**Message count**:' + 'ㅤ' + sort[1].messages
-    },
-    {
-        name: `3:ㅤㅤ<@${sort[2].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sort[2].messages
-    },
-    {
-        name: `4:ㅤㅤ<@${sort[3].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sort[3].messages
-    },
-    {
-        name: `5:ㅤㅤ<@${sort[4].userid}>ㅤㅤ`,
-        value:'**Message count**:' + 'ㅤ' +  sort[4].messages
-    },
-    {
-        name: `6:ㅤㅤ<@${sort[5].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sort[5].messages
-    },
-    {
-        name: `7:ㅤㅤ<@${sort[6].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sort[6].messages
-    },
-    {
-        name: `8:ㅤㅤ<@${sort[7].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sort[7].messages
-    },
-    {
-        name: `9:ㅤㅤ<@${sort[8].userid}>ㅤㅤ`,
-        value:'**Message count**:' + 'ㅤ' + sort[8].messages
-    },
-    {
-        name: `10:ㅤㅤ<@${sort[9].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sort[9].messages
-    },
-],
-    
- 
-}
+let week = await Messages.find({}).sort({'messages': -1}).exec()
+let day = await Messages.find({}).sort({'dailyMsg': -1}).exec()
+let month = await Messages.find({}).sort({'monthlyMsg': -1}).exec()
 
-let  monthlyembed = {
-    color: '#2d6fe0',
-    title:`__**Monthly Messages Leaderboard**__`,
+let guild = await client.guilds.fetch('752105258481877073')
+let members = await guild.members.fetch()
+await members.get(week[0].userid).roles.add('1048571605116264458')
+await members.get(day[0].userid).roles.add('1048554544197537804')
+await members.get(month[0].userid).roles.add('1048571221081591869')
+let monthname = 'December'
+let weekname = 'First Week of December'
+
+let dailyembed = {
+    color: '#58bee0',
+    Title: `<a:snowflake:1048612029423964190> Today's Rankings\nㅤ`,
     fields: [
         {
-            name: `There are ${await Messages.count()} competing every month for the first place!!`,
-            value: '\u200B'
-        },
-        {
-        name: `1:ㅤㅤ<@${sortMonthly[0].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortMonthly[0].monthlyMsg
+            name: `<a:crownkingblue:1048612972043456523>𝐓𝐨𝐩 𝟏 <:blue_arrow:1048615147108827286> <@${day[0].userid}>`,
+            value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${day[0].dailyMsg}**`
+
     },
     {
-        name: `2:ㅤㅤ<@${sortMonthly[1].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortMonthly[1].monthlyMsg
-    },
-    {
-        name: `3:ㅤㅤ<@${sortMonthly[2].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortMonthly[2].monthlyMsg
-    },
-    {
-        name: `4:ㅤㅤ<@${sortMonthly[3].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortMonthly[3].monthlyMsg
-    },
-    {
-        name: `5:ㅤㅤ<@${sortMonthly[4].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortMonthly[4].monthlyMsg
-    },
-    {
-        name: `6:ㅤㅤ<@${sortMonthly[5].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortMonthly[5].monthlyMsg
-    },
-    {
-        name: `7:ㅤㅤ<@${sortMonthly[6].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortMonthly[6].monthlyMsg
-    },
-    {
-        name: `8:ㅤㅤ<@${sortMonthly[7].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortMonthly[7].monthlyMsg
-    },
-    {
-        name: `9:ㅤㅤ<@${sortMonthly[8].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortMonthly[8].monthlyMsg
-    },
-    {
-        name: `10:ㅤㅤ<@${sortMonthly[9].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortMonthly[9].monthlyMsg
-    },
+        name: `<a:darkflame:1048613668809605200>𝐓𝐨𝐩 𝟐 <:blue_arrow:1048615147108827286> <@${day[1].userid}>`,
+        value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${day[1].dailyMsg}**`
+
+},
+{
+    name: `<a:fire_blue:1048614487831359588>𝐓𝐨𝐩 𝟑 <:blue_arrow:1048615147108827286> <@${day[2].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${day[2].dailyMsg}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩 𝟒 <:blue_arrow:1048615147108827286> <@${day[3].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${day[3].dailyMsg}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩 𝟓 <:blue_arrow:1048615147108827286> <@${day[4].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${day[4].dailyMsg}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩 𝟔 <:blue_arrow:1048615147108827286> <@${day[5].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${day[5].dailyMsg}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩 𝟕 <:blue_arrow:1048615147108827286> <@${day[6].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${day[6].dailyMsg}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩 𝟖 <:blue_arrow:1048615147108827286> <@${day[7].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${day[7].dailyMsg}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩 𝟗 <:blue_arrow:1048615147108827286> <@${day[8].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${day[8].dailyMsg}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩𝟏𝟎<:blue_arrow:1048615147108827286> <@${day[9].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${day[9].dailyMsg}**`
+
+},
+
 ],
-    
- 
+image: {
+    url: `https://media.discordapp.net/attachments/1046400542550802445/1048826790992416858/imageedit_10_3531532722.jpg`
+}
 }
 
 
-let  dailyembed = {
-    color: '#14db49',
-    title:`__**Messages Leaderboard**__`,
+
+
+
+
+
+
+
+
+
+
+let monthlyembed = {
+    color: '#58bee0',
+    Title: `<a:snowflake:1048612029423964190> ${monthname} Rankings\nㅤ`,
     fields: [
         {
-            name: `There are ${await Messages.count()} competing daily for the first place!!`,
-            value: '\u200B'
-        },
-        {
-        name: `1:ㅤㅤ<@${sortDaily[0].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortDaily[0].dailyMsg
+            name: `<a:crownkingblue:1048612972043456523>𝐓𝐨𝐩 𝟏 <:blue_arrow:1048615147108827286> <@${month[0].userid}>`,
+            value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${month[0].monthlyMsg}**`
+
     },
     {
-        name: `2:ㅤㅤ<@${sortDaily[1].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortDaily[1].dailyMsg
-    },
-    {
-        name: `3:ㅤㅤ<@${sortDaily[2].userid}>ㅤㅤ`,
-        value:'**Message count**:' + 'ㅤ' + sortDaily[2].dailyMsg
-    },
-    {
-        name: `4:ㅤㅤ<@${sortDaily[3].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortDaily[3].dailyMsg
-    },
-    {
-        name: `5:ㅤㅤ<@${sortDaily[4].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortDaily[4].dailyMsg
-    },
-    {
-        name: `6:ㅤㅤ<@${sortDaily[5].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortDaily[5].dailyMsg
-    },         
-    {
-        name: `7:ㅤㅤ<@${sortDaily[6].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortDaily[6].dailyMsg
-    },
-    {
-        name: `8:ㅤㅤ<@${sortDaily[7].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortDaily[7].dailyMsg
-    },
-    {
-        name: `9:ㅤㅤ<@${sortDaily[8].userid}>ㅤㅤ`,
-        value: '**Message count**:' + 'ㅤ' + sortDaily[8].dailyMsg
-    },
-    {
-        name: `10:ㅤㅤ<@${sortDaily[9].userid}>ㅤㅤ`,
-        value:  '**Message count**:' + 'ㅤ' + sortDaily[9].dailyMsg
-    },
+        name: `<a:darkflame:1048613668809605200>𝐓𝐨𝐩 𝟐 <:blue_arrow:1048615147108827286> <@${month[1].userid}>`,
+        value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${month[1].monthlyMsg}**`
+
+},
+{
+    name: `<a:fire_blue:1048614487831359588>𝐓𝐨𝐩 𝟑 <:blue_arrow:1048615147108827286> <@${month[2].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${month[2].monthlyMsg}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩 𝟒 <:blue_arrow:1048615147108827286> <@${month[3].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${month[3].monthlyMsg}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩 𝟓 <:blue_arrow:1048615147108827286> <@${month[4].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${month[4].monthlyMsg}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩 𝟔 <:blue_arrow:1048615147108827286> <@${month[5].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${month[5].monthlyMsg}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩 𝟕 <:blue_arrow:1048615147108827286> <@${month[6].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${month[6].monthlyMsg}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩 𝟖 <:blue_arrow:1048615147108827286> <@${month[7].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${month[7].monthlyMsg}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩 𝟗 <:blue_arrow:1048615147108827286> <@${month[8].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${month[8].monthlyMsg}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩𝟏𝟎<:blue_arrow:1048615147108827286> <@${month[9].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${month[9].monthlyMsg}**`
+
+},
+
 ],
-    
- 
+image: {
+    url: `https://media.discordapp.net/attachments/1046400542550802445/1048826790992416858/imageedit_10_3531532722.jpg`
 }
-await webhook.editMessage(process.env.DAILY,{embeds:[dailyembed]})
+}
+
+let embed = {
+    color: '#58bee0',
+    Title: `<a:snowflake:1048612029423964190> ${weekname}\nㅤ`,
+    fields: [
+        {
+            name: `<a:crownkingblue:1048612972043456523>𝐓𝐨𝐩 𝟏 <:blue_arrow:1048615147108827286> <@${week[0].userid}>`,
+            value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${week[0].messages}**`
+
+    },
+    {
+        name: `<a:darkflame:1048613668809605200>𝐓𝐨𝐩 𝟐 <:blue_arrow:1048615147108827286> <@${week[1].userid}>`,
+        value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${week[1].messages}**`
+
+},
+{
+    name: `<a:fire_blue:1048614487831359588>𝐓𝐨𝐩 𝟑 <:blue_arrow:1048615147108827286> <@${week[2].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${week[2].messages}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩 𝟒 <:blue_arrow:1048615147108827286> <@${week[3].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${week[3].messages}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩 𝟓 <:blue_arrow:1048615147108827286> <@${week[4].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${week[4].messages}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩 𝟔 <:blue_arrow:1048615147108827286> <@${week[5].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${week[5].messages}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩 𝟕 <:blue_arrow:1048615147108827286> <@${week[6].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${week[6].messages}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩 𝟖 <:blue_arrow:1048615147108827286> <@${week[7].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${week[7].messages}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩 𝟗 <:blue_arrow:1048615147108827286> <@${week[8].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${week[8].messages}**`
+
+},
+{
+    name: `:snowflake:𝐓𝐨𝐩𝟏𝟎<:blue_arrow:1048615147108827286> <@${week[9].userid}>`,
+    value: `<:Message:1048617252724953109> <:blue_arrow:1048615147108827286> **${week[9].messages}**`
+
+},
+
+],
+image: {
+    url: `https://media.discordapp.net/attachments/1046400542550802445/1048826790992416858/imageedit_10_3531532722.jpg`
+}
+}
+
+
+ 
+await webhook.editMessage('',{embeds:[dailyembed]})
 await webhook.editMessage(process.env.MONTHLY,{embeds:[monthlyembed]})
 await webhook.editMessage(process.env.ALL,{embeds:[embed]})
 }
+
 // section for events schedules
 
 
