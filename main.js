@@ -46,4 +46,4 @@ Reset
 dailyReset
 monthlyReset
 
-client.login("MTA0MzQ4MDUyNjA4ODA2MDk0OQ.G4pfVH.dH8zfrfJU7HtMksp578hnNi_9m1yFQZZXbRCAk");
+client.login(process.env.TOKEN);
